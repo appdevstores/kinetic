@@ -192,9 +192,25 @@ eas login   # your Expo account
 eas build --profile development --platform ios
 eas build --profile development --platform android
 ```
-Install on a real iPhone and Android phone. Test: the session timer (does it
-keep the screen awake? vibrate on block changes?), water break highlights,
-diagram expand/collapse, video links, and the 14-kid watermark.
+Install on a real iPhone and Android phone, then run through the checklist
+below.
+
+**Device test checklist** (run on both platforms):
+
+- [ ] Start runs the 55-min plan block by block; Pause / Reset / Skip work
+- [ ] Screen stays awake while the timer runs
+- [ ] Phone vibrates when a block ends, including water breaks
+- [ ] Active block highlights in the plan as the timer advances; water break
+      cards highlight during breaks
+- [ ] Switching weeks in the selector resets the timer and shows that week
+- [ ] "Show diagram" expands the field diagram; "Hide diagram" collapses it
+- [ ] "Watch video" opens the demo video in YouTube
+- [ ] Diagram-only activities show "Diagram only — no video"
+- [ ] Season tab: week rows open the full week page, back returns
+- [ ] For Families tab renders all sections
+- [ ] 14-kid watermark visible faintly in the background
+- [ ] App icon and launch screen show the hedgehog logo
+- [ ] No crashes or frozen UI during a full 55-minute session
 
 **Production build:**
 ```sh
