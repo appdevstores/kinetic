@@ -6,9 +6,14 @@ import { WeekSelector } from '../../components/WeekSelector';
 import { BlockType, DEFAULT_WEEK_ID, PLAN_TITLE, TEAM_NAME, weeks } from '../../data/trainingPlan';
 import { colors, spacing } from '../../theme';
 
+interface ActiveHighlight {
+  type: BlockType | 'water';
+  waterBreak?: number;
+}
+
 export default function ThisWeekScreen() {
   const [selectedId, setSelectedId] = useState(DEFAULT_WEEK_ID);
-  const [activeType, setActiveType] = useState<BlockType | null>(null);
+  const [active, setActive] = useState<ActiveHighlight | null>(null);
   const week = weeks.find((w) => w.id === selectedId) ?? weeks[0];
 
   return (
@@ -25,8 +30,17 @@ export default function ThisWeekScreen() {
       <WeekSelector selectedId={selectedId} onSelect={setSelectedId} />
 
       {/* Session timer + full plan on the same page */}
-      <SessionTimer week={week} onActiveChange={setActiveType} />
-      <WeekPlan week={week} highlightType={activeType} />
+      <SessionTimer
+        week={week}
+        onActiveChange={(type, waterBreak) =>
+          setActive(type ? { type, waterBreak } : null)
+        }
+      />
+      <WeekPlan
+        week={week}
+        highlightType={active?.type}
+        waterBreak={active?.waterBreak}
+      />
     </ScrollView>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import {
   Image,
   ImageSourcePropType,
@@ -19,6 +19,34 @@ const BLOCK_COLORS: Record<BlockType, string> = {
   drillB: colors.drillB,
   game: colors.game,
 };
+
+function parseTime(t: string) {
+  const [start, end] = t.split('–').map((x) => parseInt(x, 10));
+  return { start, end };
+}
+
+/** Slim divider shown between session blocks while the timer is not involved. */
+function WaterBreakCard({
+  start,
+  end,
+  active,
+}: {
+  start: number;
+  end: number;
+  active?: boolean;
+}) {
+  return (
+    <View style={[styles.waterBreak, active && styles.waterBreakActive]}>
+      <View style={styles.waterIconCircle}>
+        <Ionicons name="water" size={16} color={colors.water} />
+      </View>
+      <Text style={styles.waterBreakText}>Water break</Text>
+      <Text style={styles.waterBreakTime}>
+        {start}–{end} · {end - start} min
+      </Text>
+    </View>
+  );
+}
 
 function BlockCard({
   block,
@@ -105,10 +133,13 @@ function BlockCard({
 export function WeekPlan({
   week,
   highlightType,
+  waterBreak,
 }: {
   week: Week;
-  /** Block to draw attention to while the session timer runs. */
-  highlightType?: BlockType | null;
+  /** Block (or water break) to draw attention to while the session timer runs. */
+  highlightType?: BlockType | 'water' | null;
+  /** Which water break is active: 1 = before Drill A, 2 = before Drill B, 3 = before the game. */
+  waterBreak?: number;
 }) {
   return (
     <View>
@@ -125,14 +156,22 @@ export function WeekPlan({
         <Text style={styles.summary}>{week.summary}</Text>
       </View>
 
-      {/* Session blocks */}
-      {week.blocks.map((block) => (
-        <BlockCard
-          key={block.type}
-          block={block}
-          diagram={getDiagram(week.id, block.type)}
-          active={block.type === highlightType}
-        />
+      {/* Session blocks with water breaks between them */}
+      {week.blocks.map((block, i) => (
+        <Fragment key={block.type}>
+          {i > 0 && (
+            <WaterBreakCard
+              start={parseTime(week.blocks[i - 1].time).end}
+              end={parseTime(block.time).start}
+              active={highlightType === 'water' && waterBreak === i}
+            />
+          )}
+          <BlockCard
+            block={block}
+            diagram={getDiagram(week.id, block.type)}
+            active={block.type === highlightType}
+          />
+        </Fragment>
       ))}
 
       {/* Coaching points */}
@@ -315,6 +354,40 @@ const styles = StyleSheet.create({
   diagramImage: {
     width: '100%',
     height: 260,
+  },
+  waterBreak: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    backgroundColor: colors.waterSoft,
+    borderRadius: radius.md,
+    borderWidth: 1,
+    borderColor: 'transparent',
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
+    marginBottom: spacing.md,
+  },
+  waterBreakActive: {
+    borderColor: colors.water,
+  },
+  waterIconCircle: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  waterBreakText: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: colors.water,
+  },
+  waterBreakTime: {
+    marginLeft: 'auto',
+    fontSize: 12,
+    fontWeight: '700',
+    color: colors.textMuted,
   },
   diagramNote: {
     flexDirection: 'row',

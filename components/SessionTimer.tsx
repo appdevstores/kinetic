@@ -26,8 +26,12 @@ function formatTime(totalSec: number) {
 
 interface Props {
   week: Week;
-  /** Called with the block that is currently running, or null for water breaks / when finished. */
-  onActiveChange?: (active: BlockType | null) => void;
+  /**
+   * Called with the block that is currently running. During a water break the
+   * type is 'water' and waterBreak is which break (1 = before Drill A,
+   * 2 = before Drill B, 3 = before the game). Null when finished.
+   */
+  onActiveChange?: (active: BlockType | 'water' | null, waterBreak?: number) => void;
 }
 
 export function SessionTimer({ week, onActiveChange }: Props) {
@@ -52,10 +56,18 @@ export function SessionTimer({ week, onActiveChange }: Props) {
 
   // Report the active block so the plan below can highlight it.
   useEffect(() => {
-    const active =
-      finished || segment.type === 'water' ? null : (segment.type as BlockType);
-    onActiveChange?.(active);
-  }, [index, finished, segment.type, onActiveChange]);
+    if (finished) {
+      onActiveChange?.(null);
+      return;
+    }
+    if (segment.type === 'water') {
+      const waterBreak =
+        segments.slice(0, index).filter((s) => s.type === 'water').length + 1;
+      onActiveChange?.('water', waterBreak);
+      return;
+    }
+    onActiveChange?.(segment.type as BlockType);
+  }, [index, finished, segment.type, segments, onActiveChange]);
 
   // Tick once per second while running.
   useEffect(() => {

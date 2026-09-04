@@ -28,6 +28,8 @@ export const colors = {
   video: '#DC2626',
   /** Water break color */
   water: '#0EA5E9',
+  /** Soft tint for water break cards */
+  waterSoft: '#E0F2FE',
 };
 
 export const spacing = {
