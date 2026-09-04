@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "kinetic",
-    "slug": "kinetic",
+    "name": "Hedgehogs U7",
+    "slug": "hedgehogs-u7",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,7 +19,16 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-status-bar"
+    ],
+    "scheme": "hedgehogs",
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
