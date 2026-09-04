@@ -32,10 +32,17 @@ app/
   (tabs)/index.tsx    This Week — week selector + full session plan
   (tabs)/season.tsx   Season overview — all 8 weeks, league format
   (tabs)/info.tsx     For Parents — what to bring, what to expect
+  (tabs)/timer.tsx    Session timer — runs the 60-min plan block by block,
+                      with skippable water breaks between drills
   week/[id].tsx       Full plan for a single week
 components/
   WeekPlan.tsx        Renders one week (blocks, coaching points, equipment)
+  WeekSelector.tsx    Horizontal week chip row
 data/
-  trainingPlan.ts     All session content
+  trainingPlan.ts     All session content + buildSessionTimeline()
 theme.ts              Colors and spacing
 ```
+
+Water break length is `WATER_BREAK_MIN` in `data/trainingPlan.ts` (3 minutes by
+default). The timer vibrates when a block ends and keeps the screen awake.
+

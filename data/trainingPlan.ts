@@ -531,3 +531,51 @@ export const weeks: Week[] = [
 
 /** Suggested default week shown on launch. Update this as the season progresses. */
 export const DEFAULT_WEEK_ID = 1;
+
+/** Length of the water break inserted between session blocks. */
+export const WATER_BREAK_MIN = 3;
+
+export type TimelineSegmentType = BlockType | 'water';
+
+export interface TimelineSegment {
+  /** Unique key, e.g. "drillA" or "water-2" */
+  key: string;
+  type: TimelineSegmentType;
+  /** Short label, e.g. "WARM-UP", "WATER" */
+  label: string;
+  /** What the coach sees, e.g. "Red Light, Green Light" or "Water break" */
+  title: string;
+  durationSec: number;
+}
+
+/**
+ * Builds the run-of-play for a session: the four blocks with a water
+ * break between them. Block lengths come from the PDF; breaks are
+ * WATER_BREAK_MIN minutes each.
+ */
+export function buildSessionTimeline(
+  week: Week,
+  waterBreakMin: number = WATER_BREAK_MIN,
+): TimelineSegment[] {
+  const segments: TimelineSegment[] = [];
+  week.blocks.forEach((block, i) => {
+    if (i > 0) {
+      segments.push({
+        key: `water-${i}`,
+        type: 'water',
+        label: 'WATER',
+        title: 'Water break',
+        durationSec: waterBreakMin * 60,
+      });
+    }
+    const [start, end] = block.time.split('–').map((t) => parseInt(t, 10));
+    segments.push({
+      key: block.type,
+      type: block.type,
+      label: block.label,
+      title: block.activity,
+      durationSec: (end - start) * 60,
+    });
+  });
+  return segments;
+}

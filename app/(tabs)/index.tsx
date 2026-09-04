@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { WeekPlan } from '../../components/WeekPlan';
+import { WeekSelector } from '../../components/WeekSelector';
 import { DEFAULT_WEEK_ID, PLAN_TITLE, TEAM_NAME, weeks } from '../../data/trainingPlan';
 import { colors, radius, spacing } from '../../theme';
 
 export default function ThisWeekScreen() {
+  const router = useRouter();
   const [selectedId, setSelectedId] = useState(DEFAULT_WEEK_ID);
   const week = weeks.find((w) => w.id === selectedId) ?? weeks[0];
 
@@ -18,35 +22,21 @@ export default function ThisWeekScreen() {
       <Text style={styles.teamName}>{TEAM_NAME}</Text>
       <Text style={styles.planTitle}>{PLAN_TITLE}</Text>
 
-      {/* Week selector */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.chipsRow}
+      {/* Start timer */}
+      <Pressable
+        style={({ pressed }) => [styles.timerButton, pressed && styles.pressed]}
+        onPress={() =>
+          router.push({ pathname: '/(tabs)/timer', params: { week: String(selectedId) } })
+        }
+        accessibilityRole="button"
+        accessibilityLabel="Start session timer"
       >
-        {weeks.map((w) => {
-          const selected = w.id === selectedId;
-          return (
-            <Pressable
-              key={w.id}
-              onPress={() => setSelectedId(w.id)}
-              accessibilityRole="button"
-              accessibilityState={{ selected }}
-              style={[styles.chip, selected && styles.chipSelected]}
-            >
-              <Text style={[styles.chipTitle, selected && styles.chipTitleSelected]}>
-                Week {w.id}
-              </Text>
-              <Text
-                style={[styles.chipFocus, selected && styles.chipFocusSelected]}
-                numberOfLines={1}
-              >
-                {w.focus}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </ScrollView>
+        <Ionicons name="timer-outline" size={20} color="#fff" />
+        <Text style={styles.timerButtonText}>Start session timer</Text>
+      </Pressable>
+
+      {/* Week selector */}
+      <WeekSelector selectedId={selectedId} onSelect={setSelectedId} />
 
       {/* The selected week's plan */}
       <WeekPlan week={week} />
@@ -76,37 +66,22 @@ const styles = StyleSheet.create({
     color: colors.text,
     marginBottom: spacing.md,
   },
-  chipsRow: {
-    gap: spacing.sm,
-    paddingBottom: spacing.md,
-  },
-  chip: {
-    backgroundColor: colors.card,
-    borderRadius: radius.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    maxWidth: 170,
-  },
-  chipSelected: {
+  timerButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
     backgroundColor: colors.primary,
-    borderColor: colors.primary,
+    borderRadius: radius.md,
+    paddingVertical: 14,
+    marginBottom: spacing.md,
   },
-  chipTitle: {
-    fontSize: 13,
-    fontWeight: '800',
-    color: colors.text,
-  },
-  chipTitleSelected: {
+  timerButtonText: {
     color: '#fff',
+    fontSize: 16,
+    fontWeight: '800',
   },
-  chipFocus: {
-    fontSize: 11,
-    color: colors.textMuted,
-    marginTop: 1,
-  },
-  chipFocusSelected: {
-    color: '#D1FAE5',
+  pressed: {
+    opacity: 0.85,
   },
 });
