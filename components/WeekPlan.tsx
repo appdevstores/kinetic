@@ -1,6 +1,16 @@
-import { Linking, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import {
+  Image,
+  ImageSourcePropType,
+  Linking,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { BlockType, SessionBlock, Week } from '../data/trainingPlan';
+import { getDiagram } from '../data/diagrams';
 import { colors, radius, spacing } from '../theme';
 
 const BLOCK_COLORS: Record<BlockType, string> = {
@@ -10,15 +20,15 @@ const BLOCK_COLORS: Record<BlockType, string> = {
   game: colors.game,
 };
 
-const BLOCK_ICONS: Record<BlockType, keyof typeof Ionicons.glyphMap> = {
-  warmup: 'flash-outline',
-  drillA: 'school-outline',
-  drillB: 'barbell-outline',
-  game: 'trophy-outline',
-};
-
-function BlockCard({ block }: { block: SessionBlock }) {
+function BlockCard({
+  block,
+  diagram,
+}: {
+  block: SessionBlock;
+  diagram?: ImageSourcePropType;
+}) {
   const blockColor = BLOCK_COLORS[block.type];
+  const [diagramOpen, setDiagramOpen] = useState(false);
   const openVideo = () => {
     if (block.videoUrl) Linking.openURL(block.videoUrl);
   };
@@ -33,6 +43,30 @@ function BlockCard({ block }: { block: SessionBlock }) {
       </View>
       <Text style={styles.blockTitle}>{block.activity}</Text>
       <Text style={styles.blockBody}>{block.howToRun}</Text>
+      {diagram && (
+        <View style={styles.diagramSection}>
+          <Pressable
+            style={({ pressed }) => [styles.diagramButton, pressed && styles.pressed]}
+            onPress={() => setDiagramOpen((open) => !open)}
+            accessibilityRole="button"
+            accessibilityLabel={`${diagramOpen ? 'Hide' : 'Show'} diagram for ${block.activity}`}
+          >
+            <Ionicons
+              name={diagramOpen ? 'chevron-up' : 'image-outline'}
+              size={16}
+              color={colors.primary}
+            />
+            <Text style={styles.diagramButtonText}>
+              {diagramOpen ? 'Hide diagram' : 'Show diagram'}
+            </Text>
+          </Pressable>
+          {diagramOpen && (
+            <View style={styles.diagramFrame}>
+              <Image source={diagram} style={styles.diagramImage} resizeMode="contain" />
+            </View>
+          )}
+        </View>
+      )}
       {block.videoUrl ? (
         <Pressable
           style={({ pressed }) => [styles.videoButton, pressed && styles.pressed]}
@@ -71,7 +105,11 @@ export function WeekPlan({ week }: { week: Week }) {
 
       {/* Session blocks */}
       {week.blocks.map((block) => (
-        <BlockCard key={block.type} block={block} />
+        <BlockCard
+          key={block.type}
+          block={block}
+          diagram={getDiagram(week.id, block.type)}
+        />
       ))}
 
       {/* Coaching points */}
@@ -206,6 +244,35 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.8,
+  },
+  diagramSection: {
+    marginBottom: spacing.md,
+  },
+  diagramButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    backgroundColor: colors.primarySoft,
+    borderRadius: radius.sm,
+    paddingVertical: 10,
+  },
+  diagramButtonText: {
+    color: colors.primary,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  diagramFrame: {
+    marginTop: spacing.sm,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.sm,
+    overflow: 'hidden',
+  },
+  diagramImage: {
+    width: '100%',
+    height: 260,
   },
   diagramNote: {
     flexDirection: 'row',

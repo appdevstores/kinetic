@@ -19,6 +19,8 @@ npx expo start
 
 All content lives in `data/trainingPlan.ts`, transcribed from
 `U7_Soccer_8Week_Training_Plan.pdf`. Edit that file when the plan changes.
+Field diagrams are in `assets/diagrams/` (wired up in `data/diagrams.ts`)
+and appear in each activity card via the "Show diagram" button.
 
 - Set `DEFAULT_WEEK_ID` to the current week — that is what families see
   first when they open the "This Week" tab.
