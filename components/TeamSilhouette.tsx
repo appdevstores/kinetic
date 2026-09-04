@@ -3,7 +3,7 @@ import { Image, ImageSourcePropType, StyleSheet, View, ViewStyle } from 'react-n
 const silhouette = require('../assets/team_silhouette.png');
 
 /**
- * Subtle background watermark: 13 kids and 2 coaches (the team) drawn as a
+ * Subtle background watermark: 14 kids and 2 coaches (the team) drawn as a
  * faint line-art strip. Rendered behind the page content.
  */
 export function TeamSilhouette({
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0,
+    top: 0,
     alignItems: 'center',
   },
   image: {

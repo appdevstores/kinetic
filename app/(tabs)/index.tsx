@@ -25,6 +25,8 @@ export default function ThisWeekScreen() {
 
   return (
     <View style={styles.screen}>
+      {/* Team watermark: 14 kids + 2 coaches, faintly in the background */}
+      <TeamSilhouette />
       <ScrollView
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
@@ -52,8 +54,6 @@ export default function ThisWeekScreen() {
           waterBreak={active?.waterBreak}
         />
       </ScrollView>
-      {/* Team watermark: 13 kids + 2 coaches, faintly in the background */}
-      <TeamSilhouette />
     </View>
   );
 }

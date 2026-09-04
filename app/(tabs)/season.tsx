@@ -15,6 +15,7 @@ export default function SeasonScreen() {
 
   return (
     <View style={styles.screen}>
+      <TeamSilhouette />
       <ScrollView
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
@@ -64,7 +65,6 @@ export default function SeasonScreen() {
         <Text style={styles.cardText}>{STANDARD_EQUIPMENT}</Text>
       </View>
       </ScrollView>
-      <TeamSilhouette />
     </View>
   );
 }
