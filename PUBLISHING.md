@@ -126,7 +126,41 @@ Both stores require:
 - **Screenshots** — iPhone 6.7" (1290×2796) and Android phone sizes showing
   the This Week screen, Season, and a diagram. Ready-made shots are in
   `screenshots/` (`ios-*` = 1290×2796, `android-*` = 1080×1920).
-- **App description** — a few sentences about the app.
+- **App description** — copy-paste ready below. The full description works
+  for both stores; the short one is for Play's "Short description" field.
+
+  | Field | Text |
+  |---|---|
+  | Play short description (max 80) | `U7 soccer training plan — sessions, diagrams, and a live session timer.` |
+  | App Store subtitle (max 30) | `U7 soccer training made simple` |
+
+  **Full description (both stores):**
+
+  ```text
+  Hedgehogs is the pocket training plan for U7 soccer teams. It puts the whole
+  season in one place, so coaches, assistant coaches, and families all know
+  exactly what happens at practice.
+
+  THIS WEEK
+  The current week's session at a glance, plus a built-in session timer that
+  runs the 55-minute plan block by block. The timer keeps the screen awake,
+  buzzes when a block ends, and highlights each activity as the session moves
+  through the warm-up, Drill A, Drill B, water breaks, and the 4v4 game.
+
+  SEASON
+  The full 8-week plan with the league format and what players work on each
+  week.
+
+  FOR FAMILIES
+  What to bring to every session, what players focus on week by week, and how
+  to support from the sideline.
+
+  Every activity card includes coaching points, equipment, a field diagram,
+  and a demo video (opening in YouTube).
+
+  Hedgehogs collects no data. There are no accounts, no sign-in, and no
+  tracking.
+  ```
 - **Age rating questionnaire** — Apple and Play both ask; the app is for
   coaches/families of U7 players. It is not directed at children (no
   child-directed marketing, no accounts for kids), so it does not need the
