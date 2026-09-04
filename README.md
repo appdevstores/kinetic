@@ -1,4 +1,4 @@
-# DASC Hedgehogs — U7 Training App
+# Hedgehogs — U7 Training App
 
 iOS + Android app (React Native via Expo) that displays the U7 training plan
 so coaches, assistant coaches, and families can follow along at practice.

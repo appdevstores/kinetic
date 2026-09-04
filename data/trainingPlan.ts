@@ -1,5 +1,5 @@
 /**
- * DASC Hedgehogs U7 training plan.
+ * Hedgehogs U7 training plan.
  * Content transcribed from U7_Soccer_8Week_Training_Plan.pdf.
  *
  * To update the plan for a new season, edit the weeks below. Each week
@@ -34,7 +34,7 @@ export interface Week {
   equipment: string;
 }
 
-export const TEAM_NAME = 'DASC Hedgehogs';
+export const TEAM_NAME = 'Hedgehogs';
 export const PLAN_TITLE = 'U7 Training Plan';
 export const SESSION_LENGTH = '55 minutes';
 export const NUM_PLAYERS = 13;

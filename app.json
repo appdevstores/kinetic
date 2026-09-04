@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Hedgehogs U7",
-    "slug": "hedgehogs-u7",
+    "name": "Hedgehogs",
+    "slug": "hedgehogs",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
