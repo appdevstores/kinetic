@@ -49,3 +49,33 @@ default; the session totals 55 minutes). Block time slots live in each block's
 `time` field and feed both the cards and the timer. The timer vibrates when a
 block ends and keeps the screen awake.
 
+## Build & publish
+
+See `PUBLISHING.md` for the full App Store / Google Play guide (accounts,
+closed-test requirement, store paperwork). Once the accounts are ready:
+
+```sh
+npm install -g eas-cli
+eas login            # your Expo account
+```
+
+Test build on your phone:
+
+```sh
+eas build --profile development --platform ios
+eas build --profile development --platform android
+```
+
+Production build + submit:
+
+```sh
+eas build --profile production --platform ios
+eas build --profile production --platform android
+eas submit --platform ios
+eas submit --platform android
+```
+
+Bundle identifiers: `com.hedgehogs.training` (iOS `bundleIdentifier`, Android
+`package` in `app.json`). Do not change them after release — stores treat a
+changed ID as a new app.
+

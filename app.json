@@ -7,9 +7,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hedgehogs.training"
     },
     "android": {
+      "package": "com.hedgehogs.training",
       "adaptiveIcon": {
         "backgroundColor": "#000000",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -24,7 +26,16 @@
     },
     "plugins": [
       "expo-router",
-      "expo-status-bar"
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#000000",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 240,
+          "resizeMode": "contain"
+        }
+      ]
     ],
     "scheme": "hedgehogs",
     "experiments": {
