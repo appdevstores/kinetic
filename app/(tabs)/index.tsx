@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { useCallback, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SessionTimer } from '../../components/SessionTimer';
+import { TeamSilhouette } from '../../components/TeamSilhouette';
 import { WeekPlan } from '../../components/WeekPlan';
 import { WeekSelector } from '../../components/WeekSelector';
 import { BlockType, DEFAULT_WEEK_ID, PLAN_TITLE, TEAM_NAME, weeks } from '../../data/trainingPlan';
@@ -16,32 +17,39 @@ export default function ThisWeekScreen() {
   const [active, setActive] = useState<ActiveHighlight | null>(null);
   const week = weeks.find((w) => w.id === selectedId) ?? weeks[0];
 
+  const handleActiveChange = useCallback(
+    (type: BlockType | 'water' | null, waterBreak?: number) =>
+      setActive(type ? { type, waterBreak } : null),
+    [],
+  );
+
   return (
-    <ScrollView
-      style={styles.screen}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* Title */}
-      <Text style={styles.teamName}>{TEAM_NAME}</Text>
-      <Text style={styles.planTitle}>{PLAN_TITLE}</Text>
+    <View style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Title */}
+        <Text style={styles.teamName}>{TEAM_NAME}</Text>
+        <Text style={styles.planTitle}>{PLAN_TITLE}</Text>
 
-      {/* Week selector */}
-      <WeekSelector selectedId={selectedId} onSelect={setSelectedId} />
+        {/* Week selector */}
+        <WeekSelector selectedId={selectedId} onSelect={setSelectedId} />
 
-      {/* Session timer + full plan on the same page */}
-      <SessionTimer
-        week={week}
-        onActiveChange={(type, waterBreak) =>
-          setActive(type ? { type, waterBreak } : null)
-        }
-      />
-      <WeekPlan
-        week={week}
-        highlightType={active?.type}
-        waterBreak={active?.waterBreak}
-      />
-    </ScrollView>
+        {/* Session timer + full plan on the same page */}
+        <SessionTimer
+          week={week}
+          onActiveChange={handleActiveChange}
+        />
+        <WeekPlan
+          week={week}
+          highlightType={active?.type}
+          waterBreak={active?.waterBreak}
+        />
+      </ScrollView>
+      {/* Team watermark: 13 kids + 2 coaches, faintly in the background */}
+      <TeamSilhouette />
+    </View>
   );
 }
 

@@ -1,6 +1,7 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { TeamSilhouette } from '../../components/TeamSilhouette';
 import {
   LEAGUE_FORMAT,
   SESSION_STRUCTURE,
@@ -13,12 +14,12 @@ export default function SeasonScreen() {
   const router = useRouter();
 
   return (
-    <ScrollView
-      style={styles.screen}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
-      <Text style={styles.sectionHeading}>How sessions work</Text>
+    <View style={styles.screen}>
+      <ScrollView
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.sectionHeading}>How sessions work</Text>
       <View style={styles.card}>
         <Text style={styles.cardText}>{SESSION_STRUCTURE}</Text>
       </View>
@@ -62,7 +63,9 @@ export default function SeasonScreen() {
       <View style={styles.card}>
         <Text style={styles.cardText}>{STANDARD_EQUIPMENT}</Text>
       </View>
-    </ScrollView>
+      </ScrollView>
+      <TeamSilhouette />
+    </View>
   );
 }
 
