@@ -23,9 +23,11 @@ const BLOCK_COLORS: Record<BlockType, string> = {
 function BlockCard({
   block,
   diagram,
+  active,
 }: {
   block: SessionBlock;
   diagram?: ImageSourcePropType;
+  active?: boolean;
 }) {
   const blockColor = BLOCK_COLORS[block.type];
   const [diagramOpen, setDiagramOpen] = useState(false);
@@ -34,12 +36,25 @@ function BlockCard({
   };
 
   return (
-    <View style={[styles.blockCard, { borderLeftColor: blockColor }]}>
+    <View
+      style={[
+        styles.blockCard,
+        { borderLeftColor: blockColor },
+        active && styles.blockCardActive,
+        active && { borderColor: blockColor },
+      ]}
+    >
       <View style={styles.blockHeader}>
         <View style={[styles.timeBadge, { backgroundColor: blockColor }]}>
           <Text style={styles.timeBadgeText}>{block.time} MIN</Text>
         </View>
         <Text style={[styles.blockLabel, { color: blockColor }]}>{block.label}</Text>
+        {active && (
+          <View style={[styles.currentPill, { backgroundColor: blockColor }]}>
+            <Ionicons name="play" size={10} color="#fff" />
+            <Text style={styles.currentPillText}>NOW</Text>
+          </View>
+        )}
       </View>
       <Text style={styles.blockTitle}>{block.activity}</Text>
       <Text style={styles.blockBody}>{block.howToRun}</Text>
@@ -87,7 +102,14 @@ function BlockCard({
   );
 }
 
-export function WeekPlan({ week }: { week: Week }) {
+export function WeekPlan({
+  week,
+  highlightType,
+}: {
+  week: Week;
+  /** Block to draw attention to while the session timer runs. */
+  highlightType?: BlockType | null;
+}) {
   return (
     <View>
       {/* Session header */}
@@ -109,6 +131,7 @@ export function WeekPlan({ week }: { week: Week }) {
           key={block.type}
           block={block}
           diagram={getDiagram(week.id, block.type)}
+          active={block.type === highlightType}
         />
       ))}
 
@@ -194,11 +217,30 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     elevation: 1,
   },
+  blockCardActive: {
+    borderWidth: 2,
+    borderLeftWidth: 5,
+  },
   blockHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
     marginBottom: spacing.sm,
+  },
+  currentPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+    marginLeft: 'auto',
+    borderRadius: 999,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  currentPillText: {
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 0.5,
   },
   timeBadge: {
     borderRadius: radius.sm,

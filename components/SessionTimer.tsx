@@ -1,17 +1,14 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, Vibration, View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
 import { useKeepAwake } from 'expo-keep-awake';
 import { Ionicons } from '@expo/vector-icons';
-import { WeekSelector } from '../../components/WeekSelector';
 import {
   BlockType,
   buildSessionTimeline,
-  DEFAULT_WEEK_ID,
   TimelineSegment,
-  weeks,
-} from '../../data/trainingPlan';
-import { colors, radius, spacing } from '../../theme';
+  Week,
+} from '../data/trainingPlan';
+import { colors, radius, spacing } from '../theme';
 
 const SEGMENT_COLORS: Record<TimelineSegment['type'], string> = {
   warmup: colors.warmup,
@@ -27,14 +24,16 @@ function formatTime(totalSec: number) {
   return `${m}:${s.toString().padStart(2, '0')}`;
 }
 
-export default function TimerScreen() {
+interface Props {
+  week: Week;
+  /** Called with the block that is currently running, or null for water breaks / when finished. */
+  onActiveChange?: (active: BlockType | null) => void;
+}
+
+export function SessionTimer({ week, onActiveChange }: Props) {
   useKeepAwake();
 
-  const params = useLocalSearchParams<{ week?: string }>();
-  const [weekId, setWeekId] = useState(Number(params.week) || DEFAULT_WEEK_ID);
-  const week = weeks.find((w) => w.id === weekId) ?? weeks[0];
   const segments = useMemo(() => buildSessionTimeline(week), [week]);
-
   const [index, setIndex] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(segments[0].durationSec);
   const [running, setRunning] = useState(false);
@@ -49,7 +48,14 @@ export default function TimerScreen() {
     setSecondsLeft(segments[0].durationSec);
     setRunning(false);
     setFinished(false);
-  }, [weekId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [week.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Report the active block so the plan below can highlight it.
+  useEffect(() => {
+    const active =
+      finished || segment.type === 'water' ? null : (segment.type as BlockType);
+    onActiveChange?.(active);
+  }, [index, finished, segment.type, onActiveChange]);
 
   // Tick once per second while running.
   useEffect(() => {
@@ -96,13 +102,7 @@ export default function TimerScreen() {
   const progress = segment ? 1 - secondsLeft / segment.durationSec : 0;
 
   return (
-    <ScrollView
-      style={styles.screen}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-    >
-      <WeekSelector selectedId={weekId} onSelect={setWeekId} />
-
+    <View style={styles.container}>
       {/* Current segment */}
       <View style={[styles.currentCard, { backgroundColor: segmentColor }]}>
         <Text style={styles.currentLabel}>{segment.label}</Text>
@@ -117,7 +117,12 @@ export default function TimerScreen() {
         </View>
 
         <Text style={styles.currentHint}>
-          {running ? 'Running' : 'Paused'} · {segment.durationSec / 60} min block
+          {finished
+            ? 'Complete'
+            : running
+              ? 'Running'
+              : 'Paused'}{' '}
+          · {segment.durationSec / 60} min block
         </Text>
       </View>
 
@@ -212,18 +217,13 @@ export default function TimerScreen() {
           <Text style={styles.finishedText}>Session complete — great work!</Text>
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  content: {
-    padding: spacing.md,
-    paddingBottom: spacing.xl,
+  container: {
+    marginBottom: spacing.lg,
   },
   currentCard: {
     borderRadius: radius.lg,
@@ -273,7 +273,7 @@ const styles = StyleSheet.create({
   controlsRow: {
     flexDirection: 'row',
     gap: spacing.sm,
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
   },
   controlButton: {
     flex: 1,
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primarySoft,
     borderRadius: radius.lg,
     padding: spacing.md,
-    marginTop: spacing.lg,
+    marginTop: spacing.md,
   },
   finishedText: {
     color: colors.primary,

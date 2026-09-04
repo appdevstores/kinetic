@@ -29,13 +29,14 @@ and appear in each activity card via the "Show diagram" button.
 
 ```
 app/
-  (tabs)/index.tsx    This Week — week selector + full session plan
+  (tabs)/index.tsx    This Week — week selector + session timer + full plan
+                      on one page; the active block lights up as the timer runs
   (tabs)/season.tsx   Season overview — all 8 weeks, league format
   (tabs)/info.tsx     For Parents — what to bring, what to expect
-  (tabs)/timer.tsx    Session timer — runs the 55-min plan block by block,
-                      with skippable water breaks between drills
   week/[id].tsx       Full plan for a single week
 components/
+  SessionTimer.tsx    Runs the 55-min plan block by block, with skippable
+                      water breaks between drills
   WeekPlan.tsx        Renders one week (blocks, coaching points, equipment)
   WeekSelector.tsx    Horizontal week chip row
 data/
