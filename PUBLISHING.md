@@ -187,13 +187,29 @@ npm install -g eas-cli
 eas login   # your Expo account
 ```
 
-**Test build (run on a real phone):**
+**iOS — TestFlight (run on a real iPhone):**
+Requires the paid Apple Developer Program and an app record in App Store
+Connect (name, bundle ID `com.hedgehogs.training`, privacy policy URL).
+Upload the production build once — the same binary is used for beta testing
+and can be promoted to App Review later, no rebuild needed:
+
 ```sh
-eas build --profile development --platform ios
-eas build --profile development --platform android
+eas build --profile production --platform ios   # produces the .ipa
+eas submit --platform ios                        # uploads to TestFlight
 ```
-Install on a real iPhone and Android phone, then run through the checklist
-below.
+
+Then in App Store Connect → **TestFlight**, add your Apple ID (and any other
+testers) as **internal testers** — up to 100, no Apple beta review, installs
+via the TestFlight app within minutes of the upload finishing. There is no
+14-day requirement on iOS like Android's closed test. (No iPhone handy yet?
+`npx expo start` + the Expo Go app is a free quick preview that needs no
+Apple account.)
+
+**Android — preview build (run on a real phone):**
+```sh
+eas build --profile preview --platform android  # installable .apk
+```
+Install the APK directly on the phone, then run through the checklist below.
 
 **Device test checklist** (run on both platforms):
 
