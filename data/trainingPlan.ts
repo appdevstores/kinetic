@@ -66,9 +66,9 @@ export const WHAT_TO_BRING = [
 ];
 
 export const PARENT_INFO = {
-  title: 'Information for parents',
+  title: 'Information for families',
   intro:
-    'This plan sets out the eight training sessions for the season. It is shared with parents so that you can see what the players are working on each week and how sessions are organized.',
+    'This plan sets out the eight training sessions for the season. It is shared with families so that you can see what the players are working on each week and how sessions are organized.',
   whatYourChildWillWorkOn: [
     {
       when: 'Weeks 1–2',
@@ -105,7 +105,7 @@ export const PARENT_INFO = {
     'The aim across these eight weeks is that every player becomes comfortable with a ball at their feet, understands the basics of passing, shooting and defending, and finishes the season wanting to play again. Game results are not a measure of whether that has been achieved.',
   sideline: [
     'Encouragement for both teams is always welcome. Instructions during play are not — players at this age cannot process sideline coaching and watch the ball at the same time.',
-    'Referees at this level are often young or volunteers. Decisions are not disputed by coaches or parents.',
+    'Referees at this level are often young or volunteers. Decisions are not disputed by coaches or families.',
     'The most useful question after a game is whether they enjoyed it, rather than whether they won or how many goals they scored.',
   ],
 };
