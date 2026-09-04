@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SessionTimer } from '../../components/SessionTimer';
 import { TeamSilhouette } from '../../components/TeamSilhouette';
 import { WeekPlan } from '../../components/WeekPlan';
@@ -30,8 +30,13 @@ export default function ThisWeekScreen() {
         showsVerticalScrollIndicator={false}
       >
         {/* Title */}
-        <Text style={styles.teamName}>{TEAM_NAME}</Text>
-        <Text style={styles.planTitle}>{PLAN_TITLE}</Text>
+        <View style={styles.titleRow}>
+          <Image source={require('../../assets/logo.jpg')} style={styles.logo} resizeMode="cover" />
+          <View style={styles.titleText}>
+            <Text style={styles.teamName}>{TEAM_NAME}</Text>
+            <Text style={styles.planTitle}>{PLAN_TITLE}</Text>
+          </View>
+        </View>
 
         {/* Week selector */}
         <WeekSelector selectedId={selectedId} onSelect={setSelectedId} />
@@ -62,17 +67,30 @@ const styles = StyleSheet.create({
     padding: spacing.md,
     paddingBottom: spacing.xl,
   },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
+    marginTop: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  logo: {
+    width: 72,
+    height: 72,
+    borderRadius: 16,
+  },
+  titleText: {
+    flex: 1,
+  },
   teamName: {
     fontSize: 13,
     fontWeight: '800',
     letterSpacing: 1.5,
     color: colors.primary,
-    marginTop: spacing.sm,
   },
   planTitle: {
     fontSize: 26,
     fontWeight: '900',
     color: colors.text,
-    marginBottom: spacing.md,
   },
 });

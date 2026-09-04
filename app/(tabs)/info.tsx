@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PARENT_INFO, WHAT_TO_BRING } from '../../data/trainingPlan';
 import { colors, radius, spacing } from '../../theme';
@@ -11,6 +11,7 @@ export default function InfoScreen() {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.introCard}>
+        <Image source={require('../../assets/logo.jpg')} style={styles.logo} resizeMode="cover" />
         <Text style={styles.introTitle}>{PARENT_INFO.title}</Text>
         <Text style={styles.introText}>{PARENT_INFO.intro}</Text>
       </View>
@@ -80,6 +81,13 @@ const styles = StyleSheet.create({
     borderRadius: radius.lg,
     padding: spacing.lg,
     marginTop: spacing.sm,
+    alignItems: 'center',
+  },
+  logo: {
+    width: 96,
+    height: 96,
+    borderRadius: 20,
+    marginBottom: spacing.md,
   },
   introTitle: {
     color: '#fff',
