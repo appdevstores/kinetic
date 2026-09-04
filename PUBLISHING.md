@@ -121,7 +121,8 @@ Both stores require:
 
 - **Privacy policy URL** — your app collects no personal data, so a simple
   one-page policy ("we don't collect anything; videos open YouTube") is
-  enough. Host it free on GitHub Pages, Notion (published), or any site.
+  enough. **This repo's policy is live at
+  https://appdevstores.github.io/kinetic/** (source: `docs/index.html`).
 - **Screenshots** — iPhone 6.7" (1290×2796) and Android phone sizes showing
   the This Week screen, Season, and a diagram. I can help generate these.
 - **App description** — a few sentences about the app.
@@ -210,7 +211,7 @@ This produces the `.ipa` (iOS) and `.aab` (Android) files.
 - [ ] Apple Developer Program enrolled ($99) + confirmation received
 - [ ] Google Play developer account created ($25) + verified
 - [ ] Bundle identifiers chosen (`com.hedgehogs.training` or similar)
-- [ ] Privacy policy published at a URL
+- [x] Privacy policy published at a URL (https://appdevstores.github.io/kinetic/)
 - [ ] Repo prep done (eas.json, identifiers, splash screen)
 - [ ] Test build installed on a real iPhone + Android phone, all features tested
 - [ ] iOS: App Store Connect app record created, build uploaded, review submitted
