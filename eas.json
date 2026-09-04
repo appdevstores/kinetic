@@ -28,6 +28,12 @@
     }
   },
   "submit": {
+    "preview": {
+      "android": {
+        "track": "alpha",
+        "releaseStatus": "completed"
+      }
+    },
     "production": {}
   }
 }
