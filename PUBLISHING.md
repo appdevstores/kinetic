@@ -124,7 +124,8 @@ Both stores require:
   enough. **This repo's policy is live at
   https://appdevstores.github.io/kinetic/** (source: `docs/index.html`).
 - **Screenshots** — iPhone 6.7" (1290×2796) and Android phone sizes showing
-  the This Week screen, Season, and a diagram. I can help generate these.
+  the This Week screen, Season, and a diagram. Ready-made shots are in
+  `screenshots/` (`ios-*` = 1290×2796, `android-*` = 1080×1920).
 - **App description** — a few sentences about the app.
 - **Age rating questionnaire** — Apple and Play both ask; the app is for
   coaches/families of U7 players. It is not directed at children (no
