@@ -12,7 +12,7 @@ export interface SessionBlock {
   type: BlockType;
   /** Short label shown on the card, e.g. "WARM-UP" */
   label: string;
-  /** Time window within the 60-minute session, e.g. "0–10" */
+  /** Time window within the 55-minute session, e.g. "0–10" */
   time: string;
   /** Activity name, e.g. "Red Light, Green Light" */
   activity: string;
@@ -36,12 +36,12 @@ export interface Week {
 
 export const TEAM_NAME = 'DASC Hedgehogs';
 export const PLAN_TITLE = 'U7 Training Plan';
-export const SESSION_LENGTH = '60 minutes';
+export const SESSION_LENGTH = '55 minutes';
 export const NUM_PLAYERS = 13;
 
-/** The fixed structure every session follows. */
+/** The fixed structure every session follows (55 minutes including water breaks). */
 export const SESSION_STRUCTURE =
-  'Every session follows the same four blocks: 0–10 warm-up game · 10–25 Drill A (learning the technique) · 25–40 Drill B (applying it under pressure) · 40–60 4v4 game.';
+  'Every session follows the same four blocks: 0–10 warm-up game · 12–24 Drill A (learning the technique) · 26–38 Drill B (applying it under pressure) · 40–55 4v4 game, with a 2-minute water break between blocks.';
 
 /** League format facts shown on the season overview. */
 export const LEAGUE_FORMAT = [
@@ -129,7 +129,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: 'Cone Weaving',
         howToRun:
           'Three lanes so no one waits. Weave through, jog back, repeat. Finish with a timed race.',
@@ -138,7 +138,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: 'Sharks and Minnows',
         howToRun:
           'Minnows dribble across while sharks attempt to knock the ball away. Players caught become sharks.',
@@ -147,7 +147,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4 Free Play',
         howToRun:
           'Three teams of four, winner stays on. No positions, no goalkeeper, no offside.',
@@ -181,7 +181,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: 'First Touch Circle',
         howToRun:
           'Two circles of six or seven with a coach serving. Receive, settle, then pass to a new player.',
@@ -190,7 +190,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: 'Shadow Dribble',
         howToRun:
           'In pairs. The leader dribbles freely and the partner mirrors two steps behind. Swap each minute.',
@@ -199,7 +199,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4 Scrimmage',
         howToRun:
           'A goal counts double when the scorer controls the ball before shooting.',
@@ -233,7 +233,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: 'Passing Through Gates',
         howToRun:
           'Scattered cone gates. Pairs earn a point for each pass completed through any gate.',
@@ -242,7 +242,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: 'Monkey in the Middle (2v1)',
         howToRun:
           'Two attackers keep possession from one defender. The defender swaps in on winning the ball.',
@@ -251,7 +251,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4 with Two-Pass Rule',
         howToRun:
           'A bonus point for any team completing two consecutive passes.',
@@ -285,7 +285,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: 'Collecting Gates',
         howToRun:
           'Unopposed. Sixty seconds to dribble through as many gates as possible, then repeat and improve.',
@@ -294,7 +294,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: '1v1 to the Gates',
         howToRun:
           'The attacker attempts to beat the defender through any gate. Roles swap each repetition.',
@@ -303,7 +303,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4 Scrimmage',
         howToRun:
           'An additional point for beating an opponent one-on-one.',
@@ -336,7 +336,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: 'Three-Angle Shooting',
         howToRun:
           'No goalkeeper. Players aim at the corner cones from three positions, three shots each.',
@@ -345,7 +345,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: '2v2 to Goal',
         howToRun:
           'Two attackers against two defenders, attacking either goal. The first goal ends the round.',
@@ -354,7 +354,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4, Shoot on Sight',
         howToRun:
           'Small goals, no goalkeeper. Encourage every attempt.',
@@ -388,7 +388,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: '1v1 Defending',
         howToRun:
           'The defender stays goal-side, forces the attacker wide and delays rather than committing.',
@@ -397,7 +397,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: '2v2 Defend the Goal',
         howToRun:
           'One defender presses the ball while the second covers behind. Never both at once.',
@@ -406,7 +406,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4 Scrimmage',
         howToRun:
           'Award a point for winning the ball back cleanly, in addition to goals.',
@@ -441,7 +441,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: '3v3 Possession Triangle',
         howToRun:
           'Four consecutive passes scores a point. Rotate teams every four minutes.',
@@ -450,7 +450,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: '4v4 with Spacing',
         howToRun:
           'Game format. Pause play twice to highlight good spacing, then allow the game to flow.',
@@ -459,7 +459,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: '4v4 Scrimmage',
         howToRun:
           'No pauses. Players apply the spacing themselves, which is the test of the session.',
@@ -493,7 +493,7 @@ export const weeks: Week[] = [
       {
         type: 'drillA',
         label: 'DRILL A',
-        time: '10–25',
+        time: '12–24',
         activity: 'Three-Station Rotation',
         howToRun:
           'Dribbling, passing and shooting, five minutes each, with one assistant coach per station.',
@@ -502,7 +502,7 @@ export const weeks: Week[] = [
       {
         type: 'drillB',
         label: 'DRILL B',
-        time: '25–40',
+        time: '26–38',
         activity: 'World Cup Mini-Tournament',
         howToRun:
           'Three teams of four plus a rotating player. Five-minute games, winner stays on.',
@@ -511,7 +511,7 @@ export const weeks: Week[] = [
       {
         type: 'game',
         label: 'GAME',
-        time: '40–60',
+        time: '40–55',
         activity: 'Final Games and Presentation',
         howToRun:
           'Closing games, followed by individual recognition for every player.',
@@ -532,8 +532,12 @@ export const weeks: Week[] = [
 /** Suggested default week shown on launch. Update this as the season progresses. */
 export const DEFAULT_WEEK_ID = 1;
 
-/** Length of the water break inserted between session blocks. */
-export const WATER_BREAK_MIN = 3;
+/**
+ * Length of the water break inserted between session blocks.
+ * With blocks of 10 + 12 + 12 + 15 minutes, three 2-minute breaks make
+ * the whole session 55 minutes.
+ */
+export const WATER_BREAK_MIN = 2;
 
 export type TimelineSegmentType = BlockType | 'water';
 
@@ -548,10 +552,22 @@ export interface TimelineSegment {
   durationSec: number;
 }
 
+/** Total session length in minutes, including water breaks. */
+export function sessionTotalMin(week: Week): number {
+  let total = 0;
+  week.blocks.forEach((block, i) => {
+    if (i > 0) total += WATER_BREAK_MIN;
+    const [start, end] = block.time.split('–').map((t) => parseInt(t, 10));
+    total += end - start;
+  });
+  return total;
+}
+
 /**
  * Builds the run-of-play for a session: the four blocks with a water
- * break between them. Block lengths come from the PDF; breaks are
- * WATER_BREAK_MIN minutes each.
+ * break between them. Block lengths come from each block's time slot;
+ * breaks are WATER_BREAK_MIN minutes each. The whole session runs
+ * sessionTotalMin(week) minutes (55 with the current schedule).
  */
 export function buildSessionTimeline(
   week: Week,

@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { BlockType, SessionBlock, Week } from '../data/trainingPlan';
+import { BlockType, SessionBlock, sessionTotalMin, Week } from '../data/trainingPlan';
 import { getDiagram } from '../data/diagrams';
 import { colors, radius, spacing } from '../theme';
 
@@ -96,7 +96,7 @@ export function WeekPlan({ week }: { week: Week }) {
           <Text style={styles.weekNumber}>WEEK {week.id}</Text>
           <View style={styles.durationPill}>
             <Ionicons name="time-outline" size={13} color={colors.primary} />
-            <Text style={styles.durationPillText}>60 min</Text>
+            <Text style={styles.durationPillText}>{sessionTotalMin(week)} min</Text>
           </View>
         </View>
         <Text style={styles.focusTitle}>{week.focus}</Text>
