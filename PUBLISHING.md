@@ -213,14 +213,15 @@ This produces the `.ipa` (iOS) and `.aab` (Android) files.
 2. Upload the `.ipa` — `eas submit --platform ios` does this for you
    (it handles signing with your Apple Developer account).
 3. Fill in the App Store listing: description, screenshots, privacy policy
-   URL, category, age rating, review contact.
+   URL, category, age rating, privacy labels, support URL, review contact.
 4. **App Review**: your first submission is reviewed by Apple, typically
    24–48h (up to a few days). Respond to any questions promptly.
 
 ### Android — Play Console
 1. Play Console → **Create app** → name, default language, app type, etc.
 2. Upload the `.aab` — `eas submit --platform android` or upload manually.
-3. Fill the Store listing (description, screenshots, etc.).
+3. Fill the Store listing (description, screenshots, etc.) and the
+   **Data safety form** (declare that the app collects no data).
 4. Because your account is new: first publish the app to the **closed
    testing track**, recruit 12 testers, run the 14-day window, then apply
    for **production access** and promote the release.
@@ -241,15 +242,32 @@ This produces the `.ipa` (iOS) and `.aab` (Android) files.
 
 ## Quick checklist
 
+**Accounts & payment**
 - [ ] Apple ID with 2FA
 - [ ] Google account
 - [ ] Apple Developer Program enrolled ($99) + confirmation received
 - [ ] Google Play developer account created ($25) + verified
-- [ ] Bundle identifiers chosen (`com.hedgehogs.training` or similar)
+
+**Repo & assets — done**
+- [x] Bundle identifiers chosen (`com.hedgehogs.training`, iOS + Android)
+- [x] Repo prep done (eas.json profiles, identifiers, splash screen, `.easignore`)
 - [x] Privacy policy published at a URL (https://appdevstores.github.io/kinetic/)
-- [ ] Repo prep done (eas.json, identifiers, splash screen)
+- [x] Screenshots complete — iPhone 6.7" (1290×2796) + Android (1080×1920),
+      in `screenshots/`
+- [x] App description written (short + full, §4 above)
+
+**Store paperwork**
+- [ ] Age rating questionnaire — App Store + Play's IARC questionnaire
+- [ ] Google Play **Data safety form** — declare "no data collected or shared"
+- [ ] App Store **privacy labels** — answer the no-data declarations
+- [ ] App Store **Support URL** — required field; reuse the policy URL
+      (https://appdevstores.github.io/kinetic/)
+- [ ] EAS CLI installed and logged in (`npm i -g eas-cli`, `eas login`)
+
+**Build & test**
 - [ ] Test build installed on a real iPhone + Android phone, all features tested
+
+**Submission**
 - [ ] iOS: App Store Connect app record created, build uploaded, review submitted
 - [ ] Android: closed test with 12 testers for 14 days → production access
       applied → release promoted
-- [ ] Screenshots + descriptions + age rating complete for both stores
