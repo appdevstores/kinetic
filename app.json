@@ -40,6 +40,13 @@
     "scheme": "hedgehogs",
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "50a7216e-77c9-4270-9b80-43e61f4c97d0"
+      }
+    },
+    "owner": "har84scorpio"
   }
 }
