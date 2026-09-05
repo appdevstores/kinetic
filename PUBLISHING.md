@@ -275,9 +275,9 @@ This produces the `.ipa` (iOS) and `.aab` (Android) files.
 ## Quick checklist
 
 **Accounts & payment**
-- [ ] Apple ID with 2FA
+- [x] Apple ID with 2FA (required for enrollment)
 - [ ] Google account
-- [ ] Apple Developer Program enrolled ($99) + confirmation received
+- [x] Apple Developer Program enrolled ($99) + confirmation received
 - [ ] Google Play developer account created ($25) + verified
 
 **Repo & assets — done**
